@@ -97,8 +97,8 @@ const refreshAccessTokenController =async(req, res)=>{
         const accessToken = generateAccessToken({_id});
 
         return res.send(success(200,{accessToken}));;
-    }catch(error){
-        console.log(error); 
+    }catch(e){
+        console.log(e); 
         // return res.status(401).send("Invalid refresh key");
         return res.send(error(401, "Invalid refresh key"));
     }
