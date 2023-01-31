@@ -1,4 +1,4 @@
-const { success } = require("../../utils/responseWrapper");
+const { success } = require("../utils/responseWrapper");
 
 
 const getAllPostsController = async (req, res) =>{

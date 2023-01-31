@@ -1,7 +1,7 @@
 const User = require("../models/User");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const { error, success } = require("../../utils/responseWrapper");
+const { error, success } = require("../utils/responseWrapper");
 
 const signupController = async(req, res) => {
     try{
