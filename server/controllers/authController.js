@@ -5,9 +5,9 @@ const { error, success } = require("../utils/responseWrapper");
 
 const signupController = async(req, res) => {
     try{
-        const {email, password} = req.body;
+        const {name,email, password} = req.body;
         
-        if(!email || !password){
+        if(!email || !password || !name){
             // return res.status(400).send("All feilds are required"); 
             return res.send(error(400, "All feilds are required")); 
         }
@@ -22,6 +22,7 @@ const signupController = async(req, res) => {
         const hashPassword = await bcrypt.hash(password, 10);
 
         const user = await User.create({
+            name,
             email, 
             password: hashPassword
         })
@@ -30,11 +31,9 @@ const signupController = async(req, res) => {
         //     user,
         // });
 
-        return res.send(success(201,{
-            user,
-        }));
-    }catch(error){
-
+        return res.send(success(201,"User created"));
+    }catch(e){
+        return res.send(error(500, e.message));
     }
 }
 
@@ -47,7 +46,7 @@ const loginController = async(req, res) => {
             return res.send(error(400, "All feilds are required"));
         }
 
-        const user = await User.findOne({email});
+        const user = await User.findOne({email}).select('+password');;
 
         if(!user){
             // return res.status(409).send("User is not registered");
@@ -79,6 +78,19 @@ const loginController = async(req, res) => {
     }
 }
 
+const logoutController = async (req, res) => {
+    try {
+        res.clearCookie('jwt', {
+            httpOnly: true,
+            secure: true,
+        })
+        return res.send(success(200, 'user logged out'))
+    } catch (e) {
+        return res.send(error(500, e.message));
+    }
+}
+
+
 //this api will check the refresh token validity and generate the new access token
 const refreshAccessTokenController =async(req, res)=>{
     const cookies = req.cookies;
@@ -108,7 +120,7 @@ const refreshAccessTokenController =async(req, res)=>{
 const generateAccessToken = (data) =>{
     try{
     const token =  jwt.sign(data, process.env.ACCESS_TOKEN_PRIVATE_KEY,{
-        expiresIn:"15m"
+        expiresIn:"1d"
     });
     console.log(token); 
     return token;
@@ -128,4 +140,4 @@ const generateRefreshToken = (data) =>{
         console.log(e);
     }
 }
-module.exports ={signupController, loginController, refreshAccessTokenController}
+module.exports ={signupController, loginController, refreshAccessTokenController, logoutController}
