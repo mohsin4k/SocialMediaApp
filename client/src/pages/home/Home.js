@@ -6,7 +6,9 @@ function Home() {
   return (
     <div>
       <Navbar/>
-      <Outlet/>
+      <div className="outlet" style={{ marginTop: "60px" }}>
+                <Outlet />
+      </div>
     </div>
   )
 }

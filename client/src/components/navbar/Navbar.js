@@ -2,6 +2,8 @@ import React from 'react'
 import "./Navbar.scss";
 import Avatar from '../avatar/Avatar';
 import { useNavigate } from "react-router";
+import { AiOutlineLogout } from "react-icons/ai";
+
 function Navbar() {
     const navigate = useNavigate();
   return (
@@ -13,13 +15,12 @@ function Navbar() {
                 <div className="right-side">
                     <div
                         className="profile hover-link"
-                        onClick={() => navigate(`/profile/`)}
+                        onClick={() => navigate(`/profile/hhdh`)}
                         >
-                            Avatar
                         <Avatar />
                     </div>
                     <div className="logout hover-link" >
-                        {/* <AiOutlineLogout /> */}
+                        <AiOutlineLogout value={{ color: 'red' }}/>
                     </div>
                 </div>
             </div>
