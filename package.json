@@ -1,8 +1,10 @@
 {
   "dependencies": {
     "bcrypt": "^5.1.0",
+    "cloudinary": "^1.33.0",
     "cookie-parser": "^1.4.6",
     "jsonwebtoken": "^9.0.0",
-    "morgan": "^1.10.0"
+    "morgan": "^1.10.0",
+    "time-ago": "^0.2.1"
   }
 }

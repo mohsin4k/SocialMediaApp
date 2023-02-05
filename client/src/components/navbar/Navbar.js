@@ -3,9 +3,15 @@ import "./Navbar.scss";
 import Avatar from '../avatar/Avatar';
 import { useNavigate } from "react-router";
 import { AiOutlineLogout } from "react-icons/ai";
+import {useSelector} from 'react-redux';
 
 function Navbar() {
     const navigate = useNavigate();
+    const myProfile = useSelector(state => state.appConfigReducer.myProfile);
+
+    function handleLogoutClicked(){
+
+    }
   return (
     <div className="Navbar">
             <div className="container">
@@ -15,11 +21,11 @@ function Navbar() {
                 <div className="right-side">
                     <div
                         className="profile hover-link"
-                        onClick={() => navigate(`/profile/hhdh`)}
+                        onClick={() => navigate(`/profile/${myProfile?._id}`)}
                         >
-                        <Avatar />
+                        <Avatar src={myProfile?.avatar?.url} />
                     </div>
-                    <div className="logout hover-link" >
+                    <div className="logout hover-link" onClick={handleLogoutClicked} >
                         <AiOutlineLogout value={{ color: 'red' }}/>
                     </div>
                 </div>
