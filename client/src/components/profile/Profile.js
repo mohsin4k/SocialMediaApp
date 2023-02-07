@@ -41,11 +41,10 @@ function handleUserFollow() {
     <div className="Profile">
       <div className="container">
         <div className="left-part">
-          <CreatePost/>
-          <Post/>
-          <Post/>
-          <Post/>
-          <Post/>
+            {isMyProfile && <CreatePost />}
+            {userProfile?.posts?.map((post) => (
+                <Post key={post._id} post={post} />
+                ))}
         </div>
         <div className="right-part">
           <div className="profile-card">
