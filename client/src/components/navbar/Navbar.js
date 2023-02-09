@@ -4,13 +4,21 @@ import Avatar from '../avatar/Avatar';
 import { useNavigate } from "react-router";
 import { AiOutlineLogout } from "react-icons/ai";
 import {useSelector} from 'react-redux';
+import { KEY_ACCESS_TOKEN, removeItem } from "../../utils/localStorageManager";
+import { axiosClient } from "../../utils/axiosClient";
 
 function Navbar() {
     const navigate = useNavigate();
     const myProfile = useSelector(state => state.appConfigReducer.myProfile);
 
-    function handleLogoutClicked(){
-
+    async function handleLogoutClicked() {
+        try {
+			await axiosClient.post('/auth/logout');
+			removeItem(KEY_ACCESS_TOKEN);
+			navigate('/login')
+		} catch (e) {
+			
+		}
     }
   return (
     <div className="Navbar">

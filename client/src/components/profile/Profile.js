@@ -14,7 +14,7 @@ function Profile() {
   const dispatch = useDispatch();
   const userProfile = useSelector((state) => state.postsReducer.userProfile);
   const myProfile = useSelector((state) => state.appConfigReducer.myProfile);
-  // const feedData = useSelector((state) => state.feedDataReducer.feedData);
+  const feedData = useSelector((state) => state.feedDataReducer.feedData);
   const [isMyProfile, setIsMyProfile] = useState(false);
   const [isFollowing, setIsFollowing] = useState(false);
 
@@ -25,10 +25,10 @@ function Profile() {
         })
     );
     setIsMyProfile(myProfile?._id === params.userId);
-    // setIsFollowing(
-    //     feedData?.followings?.find((item) => item._id === params.userId)
-    // );
-}, [myProfile]);
+    setIsFollowing(
+        feedData?.followings?.find((item) => item._id === params.userId)
+    );
+}, [myProfile, params.userId, feedData]);
 
 function handleUserFollow() {
   dispatch(followAndUnfollowUser({

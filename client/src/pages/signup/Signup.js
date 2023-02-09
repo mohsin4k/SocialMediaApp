@@ -1,13 +1,16 @@
 import React from 'react'
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Signup.scss";
 import { useState } from 'react';
 import { axiosClient } from '../../utils/axiosClient';
+import { useAlert } from 'react-alert'
 
 function Signup() {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const navigate = useNavigate();
+    const alert = useAlert()
 
     async function handleSubmit(e) {
         e.preventDefault();
@@ -17,6 +20,8 @@ function Signup() {
                 email,
                 password,
             });
+            navigate('/login');
+            alert.show('User Created')
             console.log(result);
         } catch (error) {
             console.log(error);
