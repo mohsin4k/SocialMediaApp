@@ -5,7 +5,6 @@ import "./CreatePost.scss";
 import { BsCardImage } from "react-icons/bs";
 import { axiosClient } from "../../utils/axiosClient";
 import {useDispatch, useSelector} from 'react-redux';
-// import { setLoading } from "../../redux/slices/appConfigSlice";
 import { getUserProfile } from "../../redux/slices/postsSlice";
 
 function CreatePost() {
